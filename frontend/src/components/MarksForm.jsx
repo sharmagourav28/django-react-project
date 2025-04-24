@@ -8,8 +8,8 @@ const MarksForm = () => {
     e.preventDefault();
 
     const payload = {
-      name: "Gourav Sharma",
-      pnr_number: "PNR123456",
+      student_name: "Priyanka",
+      pnr_number: "PNR654123",
       subjects: {
         DBMS: 85,
         OS: 75,
