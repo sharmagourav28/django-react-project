@@ -1,0 +1,12 @@
+# root 
+flow.setup.txt
+readme.md
+
+#backend
+__pycache__/
+settings.py
+0001_initial.py
+
+#frontend
+package-lock.json
+package.json
