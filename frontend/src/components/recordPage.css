@@ -1,0 +1,55 @@
+/* recordPage.css */
+.record-page-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.record-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.record-table th,
+.record-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.record-table th {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.record-table td {
+  font-size: 16px;
+}
+
+.result-eligible {
+  color: green;
+}
+
+.result-not-eligible {
+  color: red;
+}
+
+.download-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #2980b9;
+}

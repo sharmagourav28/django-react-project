@@ -5,6 +5,9 @@ import "./header.css"; // Import CSS for styling
 const Header = () => {
   return (
     <header className="header-container">
+      <div className="logo">
+        <h1>My App</h1> {/* Replace with an image or text-based logo */}
+      </div>
       <nav className="navbar">
         <ul className="nav-links">
           <li>
