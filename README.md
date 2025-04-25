@@ -13,7 +13,7 @@ This is a **full-stack web application** built with **Django** (backend) and **R
 - **Database**: SQLite (for development), MySQL
 - **Environment**: Python 3.11 with Virtualenv
 
-### 🌟 Features
+## 🌟 Features
 
 - User Registration & Authentication 🔐: Users can register, log in, and log out to manage their marks securely.
 
@@ -29,7 +29,7 @@ This is a **full-stack web application** built with **Django** (backend) and **R
 
 - Database Integration 💾: Marks and results are stored in a MySQL database, allowing the app to maintain and retrieve records for users.
 
-### 🚀 Usage
+## 🚀 Usage
 
 - Submit Marks: Navigate to the Marks Page, where you can input marks for each subject.
 
