@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./marksform.css";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 const MarksForm = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,23 @@ const MarksForm = () => {
   });
 
   const [resultData, setResultData] = useState(null);
+  const chartData = resultData
+    ? Object.entries(formData.subjects).map(([subject, mark]) => ({
+        name: subject.replace(/_/g, " "),
+        value: parseInt(mark),
+      }))
+    : [];
+
+  const COLORS = [
+    "#0088FE",
+    "#00C49F",
+    "#FFBB28",
+    "#FF8042",
+    "#FF6384",
+    "#36A2EB",
+    "#FFCE56",
+    "#AA336A",
+  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -54,6 +72,16 @@ const MarksForm = () => {
   };
 
   const subjectEntries = Object.entries(formData.subjects);
+
+  const handlePrint = () => {
+    const printContent = document.getElementById("printableArea");
+    const printWindow = window.open("", "", "width=800,height=600");
+    printWindow.document.write("<html><head><title>Print</title></head><body>");
+    printWindow.document.write(printContent.innerHTML);
+    printWindow.document.write("</body></html>");
+    printWindow.document.close();
+    printWindow.print();
+  };
 
   return (
     <div className="marks-form-container">
@@ -142,24 +170,40 @@ const MarksForm = () => {
       </form>
 
       {resultData && (
-        <div className="result-container">
+        <div className="result-container" id="printableArea">
           <h2>✅ Result: {resultData.result}</h2>
           <p>
             📊 Percentage:{" "}
             {resultData.percentage ? resultData.percentage.toFixed(2) : "N/A"}%
           </p>
+
           <div className="charts-container">
-            <img
-              src={`data:image/png;base64,${resultData.pie_chart}`}
-              alt="Pie Chart"
-              className="chart"
-            />
-            <img
-              src={`data:image/png;base64,${resultData.bar_chart}`}
-              alt="Bar Chart"
-              className="chart"
-            />
+            <div style={{ width: "100%", height: 300 }}>
+              <ResponsiveContainer>
+                <PieChart>
+                  <Pie
+                    data={chartData}
+                    dataKey="value"
+                    nameKey="name"
+                    outerRadius={100}
+                    label={({ name, value }) => `${name}: ${value}`}
+                  >
+                    {chartData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
           </div>
+
+          <button onClick={handlePrint} className="print-button">
+            🖨️ Print
+          </button>
         </div>
       )}
     </div>

@@ -124,3 +124,34 @@ label {
   padding: 10px;
   background-color: #fff;
 }
+
+/* print button */
+.print-button {
+  background-color: #4caf50; /* Green background */
+  color: white; /* White text */
+  padding: 12px 25px; /* More padding for better size */
+  font-size: 16px; /* Slightly larger font size */
+  border: none;
+  border-radius: 25px; /* Rounded corners */
+  cursor: pointer;
+  display: inline-flex; /* Align icon and text properly */
+  align-items: center; /* Vertical alignment */
+  justify-content: center; /* Horizontal alignment */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.print-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: translateY(-2px); /* Slightly lift the button on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1); /* Slightly bigger shadow on hover */
+}
+
+.print-button:active {
+  transform: translateY(0); /* Return to original position on click */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Smaller shadow when clicked */
+}
+
+.print-button svg {
+  margin-right: 10px; /* Space between the icon and text */
+}
