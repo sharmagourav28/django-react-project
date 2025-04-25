@@ -7,14 +7,14 @@ const MarksForm = () => {
     student_name: "",
     pnr_number: "",
     subjects: {
-      DBMS: 0,
-      OS: 0,
-      Networking: 0,
-      Python: 0,
-      ML: 0,
-      DSA: 0,
-      Java: 0,
-      Cloud: 0,
+      Database: 0,
+      Statistics: 0,
+      Big_data: 0,
+      Python_R_Programming: 0,
+      Machine_Learning: 0,
+      Data_Visualization: 0,
+      Java_Programming: 0,
+      Linux_Programming_Cloud: 0,
     },
   });
 
@@ -22,96 +22,130 @@ const MarksForm = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    const [field, subject] = name.split("_");
 
-    if (subject) {
-      setFormData({
-        ...formData,
+    if (name.startsWith("subjects_")) {
+      const subject = name.replace("subjects_", "");
+      setFormData((prevState) => ({
+        ...prevState,
         subjects: {
-          ...formData.subjects,
+          ...prevState.subjects,
           [subject]: value,
         },
-      });
+      }));
     } else {
-      setFormData({
-        ...formData,
-        [field]: value,
-      });
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/marks/",
         formData
       );
       setResultData(response.data);
-      console.log("Response:", response.data);
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
+  const subjectEntries = Object.entries(formData.subjects);
+
   return (
     <div className="marks-form-container">
-      <h1 className="form-title">Submit Marks</h1>
+      <h1 className="form-title">📄 Submit Your Marks</h1>
       <form onSubmit={handleSubmit} className="marks-form">
-        <div className="form-group">
-          <label>Student Name:</label>
-          <input
-            type="text"
-            name="student_name"
-            value={formData.student_name}
-            onChange={handleInputChange}
-            required
-            className="input-field"
-            placeholder="Enter your name"
-          />
+        <div className="row">
+          <div className="form-group">
+            <label>Student Name</label>
+            <input
+              type="text"
+              name="student_name"
+              value={formData.student_name}
+              onChange={handleInputChange}
+              required
+              className="input-field"
+              placeholder="Enter your name"
+            />
+          </div>
+          <div className="form-group">
+            <label>PNR Number</label>
+            <input
+              type="text"
+              name="pnr_number"
+              value={formData.pnr_number}
+              onChange={handleInputChange}
+              required
+              className="input-field"
+              placeholder="Enter your PNR number"
+            />
+          </div>
         </div>
-        <div className="form-group">
-          <label>PNR Number:</label>
-          <input
-            type="text"
-            name="pnr_number"
-            value={formData.pnr_number}
-            onChange={handleInputChange}
-            required
-            className="input-field"
-            placeholder="Enter your PNR number"
-          />
-        </div>
+
         <div className="subjects-section">
-          <h3>Subjects Marks</h3>
-          {Object.keys(formData.subjects).map((subject) => (
-            <div className="form-group" key={subject}>
-              <label>{subject}:</label>
-              <input
-                type="number"
-                name={`subjects_${subject}`}
-                value={formData.subjects[subject]}
-                onChange={handleInputChange}
-                required
-                className="input-field"
-                min="0"
-                max="100"
-                placeholder={`Enter ${subject} marks`}
-              />
-            </div>
-          ))}
+          <h3>📚 Subject Marks</h3>
+          {subjectEntries.map(([subject, value], index) =>
+            index % 2 === 0 ? (
+              <div className="row" key={subject}>
+                <div className="form-group">
+                  <label>
+                    {subject
+                      .replace(/_/g, " ")
+                      .replace(/\b\w/g, (char) => char.toUpperCase())}
+                    :
+                  </label>
+                  <input
+                    type="number"
+                    name={`subjects_${subject}`}
+                    value={value}
+                    onChange={handleInputChange}
+                    required
+                    className="input-field"
+                    min="0"
+                    max="100"
+                    placeholder="Enter marks"
+                  />
+                </div>
+                {subjectEntries[index + 1] && (
+                  <div className="form-group">
+                    <label>
+                      {subjectEntries[index + 1][0]
+                        .replace(/_/g, " ")
+                        .replace(/\b\w/g, (char) => char.toUpperCase())}
+                      :
+                    </label>
+                    <input
+                      type="number"
+                      name={`subjects_${subjectEntries[index + 1][0]}`}
+                      value={subjectEntries[index + 1][1]}
+                      onChange={handleInputChange}
+                      required
+                      className="input-field"
+                      min="0"
+                      max="100"
+                      placeholder="Enter marks"
+                    />
+                  </div>
+                )}
+              </div>
+            ) : null
+          )}
         </div>
+
         <button type="submit" className="submit-button">
-          Submit
+          🚀 Submit
         </button>
       </form>
 
       {resultData && (
         <div className="result-container">
-          <h2>Result: {resultData.result}</h2>
+          <h2>✅ Result: {resultData.result}</h2>
           <p>
-            Percentage:{" "}
+            📊 Percentage:{" "}
             {resultData.percentage ? resultData.percentage.toFixed(2) : "N/A"}%
           </p>
           <div className="charts-container">

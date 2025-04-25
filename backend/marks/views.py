@@ -13,14 +13,14 @@ def submit_marks(request):
             "student_name"
         ),  # Change to match the key in the request
         "pnr_number": data.get("pnr_number"),  # Same here
-        "dbms": subjects.get("DBMS", 0),
-        "stats": subjects.get("Stats", 0),
-        "big_data": subjects.get("Big_Data", 0),
-        "python": subjects.get("Python", 0),
-        "ml": subjects.get("ML", 0),
-        "dsa": subjects.get("DSA", 0),
-        "java": subjects.get("Java", 0),
-        "cloud": subjects.get("Cloud", 0),
+        "dbms": subjects.get("Database", 0),
+        "stats": subjects.get("Statistics", 0),
+        "big_data": subjects.get("Big_data", 0),
+        "python": subjects.get("Python_R_Programming", 0),
+        "ml": subjects.get("Machine_Learning", 0),
+        "visualization": subjects.get("Data_Visualization", 0),
+        "java": subjects.get("Java_Programming", 0),
+        "cloud": subjects.get("Linux_Programming_Cloud", 0),
     }
 
     serializer = SubjectMarksSerializer(data=flat_data)
@@ -32,16 +32,17 @@ def submit_marks(request):
             + instance.big_data
             + instance.python
             + instance.ml
-            + instance.dsa
+            + instance.visualization
             + instance.java
             + instance.cloud
         )
-        percentage = total / 8
+        # percentage = total / 8
+        percentage = (total / 320) * 100  # Updated
 
         return Response(
             {
                 "message": "Marks saved successfully!",
-                "percentage": percentage,
+                "percentage": round(percentage, 2),
                 "result": "Eligible" if percentage >= 60 else "Not Eligible",
             }
         )

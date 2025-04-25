@@ -9,7 +9,7 @@ class SubjectMarks(models.Model):
     big_data = models.IntegerField()
     python = models.IntegerField()
     ml = models.IntegerField()
-    dsa = models.IntegerField()
+    visualization = models.IntegerField()  # changed
     java = models.IntegerField()
     cloud = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
