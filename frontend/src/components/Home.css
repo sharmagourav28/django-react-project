@@ -1,4 +1,4 @@
-/* Global Styles */
+/* Global Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -7,15 +7,16 @@
 
 body {
   font-family: "Poppins", sans-serif;
-}
-
-/* Container and Hero Section */
-.homepage-container {
   background: linear-gradient(to right, #f0f4f8, #e2eafc);
   min-height: 100vh;
+}
+
+/* Homepage Container */
+.homepage-container {
   padding: 2rem;
 }
 
+/* Hero Section */
 .homepage-hero {
   text-align: center;
   margin-bottom: 3rem;
@@ -37,7 +38,7 @@ body {
   margin: 0 auto;
 }
 
-/* Features Section - 2 columns */
+/* Features Section */
 .homepage-features {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -48,22 +49,36 @@ body {
 
 .feature-card {
   background: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
-  padding: 1.2rem; /* Reduced padding */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 1.2rem;
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   gap: 1rem;
-  transition: all 0.3s ease-in-out;
-  border: 1px solid #e5e7eb; /* Light border for subtle distinction */
-  height: 150px; /* Reduced height */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .feature-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.icon-circle {
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.1);
+  color: #1f2937;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .feature-title {
@@ -76,20 +91,6 @@ body {
   font-size: 0.95rem;
   color: #6b7280;
   line-height: 1.4;
-  margin-top: 0.5rem;
-}
-
-.icon-circle {
-  font-size: 2rem;
-  background: rgba(0, 0, 0, 0.1); /* Light background for icon */
-  color: #1f2937;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 50px;
-  font-weight: bold;
-  margin-bottom: 1rem;
 }
 
 /* Buttons Section */
@@ -103,14 +104,15 @@ body {
 .homepage-btn {
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
-  color: white;
+  color: #ffffff;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
   transition: background 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
   display: inline-block;
 }
 
+/* Button Colors */
 .homepage-btn.blue {
   background-color: #2563eb;
 }
@@ -135,7 +137,7 @@ body {
   background-color: #4b5563;
 }
 
-/* Responsive Layout */
+/* Responsive Design */
 @media (max-width: 768px) {
   .homepage-features {
     grid-template-columns: 1fr;
