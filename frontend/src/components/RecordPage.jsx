@@ -7,7 +7,7 @@ const RecordPage = () => {
 
   useEffect(() => {
     // Fetch records from the backend
-    fetch("http://localhost:8000/api/records/") // Change to your API URL
+    fetch("http://localhost:8000/api/records/") // Ensure this URL is correct
       .then((response) => response.json())
       .then((data) => {
         setRecords(data); // Store fetched data in state
@@ -19,11 +19,6 @@ const RecordPage = () => {
       });
   }, []);
 
-  const handleDownload = (serialNumber) => {
-    // Logic for downloading the result (e.g., generating a PDF)
-    alert(`Downloading result for Serial No: ${serialNumber}`);
-  };
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -34,33 +29,84 @@ const RecordPage = () => {
       <table className="record-table">
         <thead>
           <tr>
-            <th>Serial Number</th>
+            <th>Student Name</th>
             <th>PNR Number</th>
+            <th>DBMS</th>
+            <th>Statistics</th>
+            <th>Big Data</th>
+            <th>Python</th>
+            <th>Machine Learning</th>
+            <th>Data Visualization</th>
+            <th>Java</th>
+            <th>Cloud</th>
+            <th>Total Marks</th>
+            <th>Percentage</th>
             <th>Result</th>
-            <th>Download</th>
           </tr>
         </thead>
         <tbody>
           {records.map((record) => (
-            <tr key={record.serial_number}>
-              <td>{record.serial_number}</td>
+            <tr key={record.pnr_number}>
+              <td>{record.student_name}</td>
               <td>{record.pnr_number}</td>
+              <td>{record.dbms}</td>
+              <td>{record.stats}</td>
+              <td>{record.big_data}</td>
+              <td>{record.python}</td>
+              <td>{record.ml}</td>
+              <td>{record.visualization}</td>
+              <td>{record.java}</td>
+              <td>{record.cloud}</td>
+              <td>
+                {record.dbms +
+                  record.stats +
+                  record.big_data +
+                  record.python +
+                  record.ml +
+                  record.visualization +
+                  record.java +
+                  record.cloud}
+              </td>
+              <td>
+                {((record.dbms +
+                  record.stats +
+                  record.big_data +
+                  record.python +
+                  record.ml +
+                  record.visualization +
+                  record.java +
+                  record.cloud) /
+                  320) *
+                  100}
+              </td>
               <td
                 className={
-                  record.result === "Eligible"
+                  (record.dbms +
+                    record.stats +
+                    record.big_data +
+                    record.python +
+                    record.ml +
+                    record.visualization +
+                    record.java +
+                    record.cloud) /
+                    320 >=
+                  60
                     ? "result-eligible"
                     : "result-not-eligible"
                 }
               >
-                {record.result}
-              </td>
-              <td>
-                <button
-                  className="download-btn"
-                  onClick={() => handleDownload(record.serial_number)}
-                >
-                  Download
-                </button>
+                {(record.dbms +
+                  record.stats +
+                  record.big_data +
+                  record.python +
+                  record.ml +
+                  record.visualization +
+                  record.java +
+                  record.cloud) /
+                  320 >=
+                60
+                  ? "Eligible"
+                  : "Not Eligible"}
               </td>
             </tr>
           ))}

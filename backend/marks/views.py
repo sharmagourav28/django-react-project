@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view  # type: ignore
 from rest_framework.response import Response  # type: ignore
 from .serializers import SubjectMarksSerializer
+from .models import SubjectMarks
 
 
 @api_view(["POST"])
@@ -48,3 +49,10 @@ def submit_marks(request):
         )
     else:
         return Response(serializer.errors, status=400)
+
+
+@api_view(["GET"])
+def get_all_marks(request):
+    records = SubjectMarks.objects.all()  # Fetch all records from the database
+    serializer = SubjectMarksSerializer(records, many=True)  # Serialize the data
+    return Response(serializer.data)  # Return the serialized data as a response
