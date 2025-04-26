@@ -6,12 +6,11 @@ const RecordPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch records from the backend
-    fetch("http://localhost:8000/api/records/") // Ensure this URL is correct
+    fetch("http://localhost:8000/api/records/")
       .then((response) => response.json())
       .then((data) => {
-        setRecords(data); // Store fetched data in state
-        setLoading(false); // Set loading to false once data is fetched
+        setRecords(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching records:", error);
@@ -45,71 +44,44 @@ const RecordPage = () => {
           </tr>
         </thead>
         <tbody>
-          {records.map((record) => (
-            <tr key={record.pnr_number}>
-              <td>{record.student_name}</td>
-              <td>{record.pnr_number}</td>
-              <td>{record.dbms}</td>
-              <td>{record.stats}</td>
-              <td>{record.big_data}</td>
-              <td>{record.python}</td>
-              <td>{record.ml}</td>
-              <td>{record.visualization}</td>
-              <td>{record.java}</td>
-              <td>{record.cloud}</td>
-              <td>
-                {record.dbms +
-                  record.stats +
-                  record.big_data +
-                  record.python +
-                  record.ml +
-                  record.visualization +
-                  record.java +
-                  record.cloud}
-              </td>
-              <td>
-                {((record.dbms +
-                  record.stats +
-                  record.big_data +
-                  record.python +
-                  record.ml +
-                  record.visualization +
-                  record.java +
-                  record.cloud) /
-                  320) *
-                  100}
-              </td>
-              <td
-                className={
-                  (record.dbms +
-                    record.stats +
-                    record.big_data +
-                    record.python +
-                    record.ml +
-                    record.visualization +
-                    record.java +
-                    record.cloud) /
-                    320 >=
-                  60
-                    ? "result-eligible"
-                    : "result-not-eligible"
-                }
-              >
-                {(record.dbms +
-                  record.stats +
-                  record.big_data +
-                  record.python +
-                  record.ml +
-                  record.visualization +
-                  record.java +
-                  record.cloud) /
-                  320 >=
-                60
-                  ? "Eligible"
-                  : "Not Eligible"}
-              </td>
-            </tr>
-          ))}
+          {records.map((record) => {
+            const total =
+              record.dbms +
+              record.stats +
+              record.big_data +
+              record.python +
+              record.ml +
+              record.visualization +
+              record.java +
+              record.cloud;
+
+            const percentage = (total / 320) * 100;
+            const isEligible = percentage >= 60;
+
+            return (
+              <tr key={record.pnr_number}>
+                <td>{record.student_name}</td>
+                <td>{record.pnr_number}</td>
+                <td>{record.dbms}</td>
+                <td>{record.stats}</td>
+                <td>{record.big_data}</td>
+                <td>{record.python}</td>
+                <td>{record.ml}</td>
+                <td>{record.visualization}</td>
+                <td>{record.java}</td>
+                <td>{record.cloud}</td>
+                <td>{total}</td>
+                <td>{percentage.toFixed(2)}%</td>
+                <td
+                  className={
+                    isEligible ? "result-eligible" : "result-not-eligible"
+                  }
+                >
+                  {isEligible ? "✅ Eligible" : "❌ Not Eligible"}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
