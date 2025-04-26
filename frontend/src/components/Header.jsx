@@ -1,36 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Using react-router for navigation
-import "./header.css"; // Import CSS for styling
+import { NavLink } from "react-router-dom";
+import "./header.css";
 
 const Header = () => {
   return (
-    <header className="header-container">
+    <header className="better-header">
       <div className="logo">
-        <h1>My App</h1> {/* Replace with an image or text-based logo */}
+        <NavLink to="/" className="logo-text">
+          🎓 ResultApp
+        </NavLink>
       </div>
-      <nav className="navbar">
-        <ul className="nav-links">
-          <li>
-            <Link to="/" className="nav-link">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/marks" className="nav-link">
-              Marks Page
-            </Link>
-          </li>
-          <li>
-            <Link to="/records" className="nav-link">
-              Records
-            </Link>
-          </li>
-          <li>
-            <Link to="/about" className="nav-link">
-              About
-            </Link>
-          </li>
-        </ul>
+      <nav className="nav-menu">
+        <NavLink to="/" className="nav-item">
+          Home
+        </NavLink>
+        <NavLink to="/marks" className="nav-item">
+          Marks
+        </NavLink>
+        <NavLink to="/records" className="nav-item">
+          Records
+        </NavLink>
+        <NavLink to="/about" className="nav-item">
+          About
+        </NavLink>
       </nav>
     </header>
   );
