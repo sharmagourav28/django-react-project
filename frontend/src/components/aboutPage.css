@@ -1,0 +1,66 @@
+/* aboutPage.css */
+
+.about-container {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.about-container h1 {
+  text-align: center;
+  font-size: 36px;
+  color: #2f4f4f;
+  margin-bottom: 30px;
+}
+
+.about-description {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.7;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.about-tech-stack,
+.about-features {
+  margin-bottom: 40px;
+}
+
+.about-tech-stack h2,
+.about-features h2 {
+  font-size: 28px;
+  color: #1d4ed8;
+  margin-bottom: 20px;
+}
+
+.about-tech-stack ul,
+.about-features ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about-tech-stack li,
+.about-features li {
+  background: #ffffff;
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Optional: Hover effect */
+.about-tech-stack li:hover,
+.about-features li:hover {
+  background-color: #e6f0ff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}

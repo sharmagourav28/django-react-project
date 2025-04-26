@@ -14,21 +14,55 @@ h1 {
   font-size: 32px;
 }
 
+/* Charts Section */
+.charts-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin: 40px 0;
+}
+
+.chart-item {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  min-width: 350px;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Important for PieChart to not cut */
+.chart-item canvas,
+.chart-item svg {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Record Table Section */
 .record-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #fff;
+  background-color: #ffffff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
+  margin-top: 40px;
 }
 
 .record-table th {
   background-color: #2f4f4f;
   color: white;
-  padding: 12px;
+  padding: 14px;
   font-size: 14px;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .record-table td {
@@ -47,6 +81,7 @@ h1 {
   cursor: pointer;
 }
 
+/* Result Highlight */
 .result-eligible {
   color: #28a745;
   font-weight: bold;
@@ -55,4 +90,30 @@ h1 {
 .result-not-eligible {
   color: #dc3545;
   font-weight: bold;
+}
+
+/* Download Buttons Section */
+.download-buttons {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.download-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.download-btn:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
 }
