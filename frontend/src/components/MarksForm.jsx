@@ -8,18 +8,19 @@ const MarksForm = () => {
     student_name: "",
     pnr_number: "",
     subjects: {
-      Database: 0,
-      Statistics: 0,
-      Big_data: 0,
-      Python_R_Programming: 0,
-      Machine_Learning: 0,
-      Data_Visualization: 0,
-      Java_Programming: 0,
-      Linux_Programming_Cloud: 0,
+      Database: "",
+      Statistics: "",
+      Big_data: "",
+      Python_R_Programming: "",
+      Machine_Learning: "",
+      Data_Visualization: "",
+      Java_Programming: "",
+      Linux_Programming_Cloud: "",
     },
   });
 
   const [resultData, setResultData] = useState(null);
+
   const chartData = resultData
     ? Object.entries(formData.subjects).map(([subject, mark]) => ({
         name: subject.replace(/_/g, " "),
@@ -41,18 +42,23 @@ const MarksForm = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    if (name.startsWith("subjects_")) {
+    if (name === "pnr_number") {
+      const digitsOnly = value.replace(/\D/g, ""); // Remove non-digits
+      if (digitsOnly.length <= 12) {
+        setFormData((prev) => ({ ...prev, pnr_number: digitsOnly }));
+      }
+    } else if (name.startsWith("subjects_")) {
       const subject = name.replace("subjects_", "");
-      setFormData((prevState) => ({
-        ...prevState,
+      setFormData((prev) => ({
+        ...prev,
         subjects: {
-          ...prevState.subjects,
+          ...prev.subjects,
           [subject]: value,
         },
       }));
     } else {
-      setFormData((prevState) => ({
-        ...prevState,
+      setFormData((prev) => ({
+        ...prev,
         [name]: value,
       }));
     }
@@ -60,6 +66,19 @@ const MarksForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.pnr_number.length !== 12) {
+      alert("❌ PNR Number must be exactly 12 digits.");
+      return;
+    }
+
+    // Check if all subject marks are filled
+    for (const mark of Object.values(formData.subjects)) {
+      if (mark === "" || mark === null) {
+        alert("❌ Please fill all subject marks.");
+        return;
+      }
+    }
+
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/marks/",
@@ -101,7 +120,7 @@ const MarksForm = () => {
             />
           </div>
           <div className="form-group">
-            <label>PNR Number</label>
+            <label>PRN Number</label>
             <input
               type="text"
               name="pnr_number"
@@ -109,7 +128,8 @@ const MarksForm = () => {
               onChange={handleInputChange}
               required
               className="input-field"
-              placeholder="Enter your PNR number"
+              placeholder="Enter 12-digit PNR number"
+              maxLength={12}
             />
           </div>
         </div>
