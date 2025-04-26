@@ -51,10 +51,20 @@ const MarksForm = () => {
         },
       }));
     } else {
-      setFormData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
+      if (name === "pnr_number") {
+        // Only allow numeric input and ensure it's 12 digits long
+        if (/^\d{0,12}$/.test(value)) {
+          setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+          }));
+        }
+      } else {
+        setFormData((prevState) => ({
+          ...prevState,
+          [name]: value,
+        }));
+      }
     }
   };
 
@@ -110,6 +120,9 @@ const MarksForm = () => {
               required
               className="input-field"
               placeholder="Enter your PNR number"
+              maxLength="12" // Restrict input to 12 characters
+              pattern="\d{12}" // Ensure only digits and exactly 12 characters
+              title="PNR number must be a 12-digit number"
             />
           </div>
         </div>
